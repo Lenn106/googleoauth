@@ -8,10 +8,18 @@
 <body>
   <h1>Welcome to My Website</h1>
   
+  <!-- Get Client ID Button -->
+  <button onclick="redirectToConsole()">Get Client ID</button>
+
   <!-- Google Sign-In Button -->
   <div id="google-signin-button"></div>
 
   <script>
+    // Function to redirect users to Google Developers Console
+    function redirectToConsole() {
+      window.location.href = "https://console.developers.google.com/";
+    }
+
     // Google Sign-In Configuration
     function onSuccess(googleUser) {
       // Retrieve user information
@@ -37,7 +45,8 @@
         'longtitle': true,
         'theme': 'dark',
         'onsuccess': onSuccess,
-        'onfailure': onFailure
+        'onfailure': onFailure,
+        'client_id': 'YOUR_CLIENT_ID' // Replace with your actual client ID
       });
     }
   </script>
