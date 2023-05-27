@@ -1,124 +1,47 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lenn106 - GitHub Projects</title>
-  <style>
-    body {
-      background-image: url("https://images.unsplash.com/photo-1499623838158-29acea518eaa?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2000&q=80");
-      background-size: cover;
-      background-position: center;
-      color: #ffffff;
-      font-family: Arial, sans-serif;
-      margin: 0;
-    }
-
-    .header {
-      background-color: #323232;
-      padding: 20px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .header .back-button {
-      background: transparent;
-      border: none;
-      padding: 0;
-      margin-right: 10px;
-      cursor: pointer;
-      width: 24px;
-      height: 24px;
-      background-image: url("https://o.remove.bg/downloads/0910a088-da72-449a-ae91-4030645458ce/image-removebg-preview.png");
-      background-size: cover;
-    }
-
-    h1 {
-      padding: 20px;
-      background-color: #323232;
-      color: #ffffff;
-      margin: 0;
-      text-align: center;
-    }
-
-    .container {
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
-      padding: 40px;
-    }
-
-    .project {
-      margin-bottom: 30px;
-      background-color: #323232;
-      border-radius: 10px;
-      padding: 20px;
-      max-width: 800px;
-      width: 100%;
-    }
-
-    .project h2 {
-      margin-top: 0;
-    }
-
-    .project p {
-      margin-bottom: 10px;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .project a {
-      text-decoration: none;
-      color: #ffffff;
-      font-weight: bold;
-      margin-right: 10px;
-      margin-bottom: 5px;
-    }
-
-    .invisible {
-      user-select: none;
-    }
-  </style>
+  <title>Google Sign-In Integration</title>
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
 </head>
-
 <body>
-  <div class="header">
-    <button class="back-button" onclick="window.location.href = 'https://lenn106.github.io'"></button>
-    <h1>GitHub Projects</h1>
-  </div>
-  <div class="container">
-    <div class="project">
-      <h2>NeoMenu</h2>
-      <p>A now patched i-Ready hack that I developed on my own. The only use of its repository today is for UI.</p>
-      <div>
-        <a href="https://github.com/Lenn106/NeoMenu" target="_blank">View on GitHub</a>
-        <a href="https://lenn106.github.io/NeoMenu" target="_blank">Project Website</a>
-      </div>
-    </div>
-  </div>
-  <div class="container">
-    <div class="project">
-      <h2>Hackwize</h2>
-      <p>A set of tools used to break and bypass Linewize for unrestricted computer access at school.</p>
-      <div>
-        <a href="https://github.com/Lenn106/Hackwize" target="_blank">View on GitHub</a>
-        <a href="https://lenn106.github.io/Hackwize" target="_blank">Project Website</a>
-      </div>
-    </div>
-  </div>
-  <div class="container">
-    <div class="project">
-      <h2>Edu News</h2>
-      <p>A unblocked games website similar to fishme.me. Click the word "problems" on article 1.</p>
-      <div>
-        <a href="https://github.com/Lenn106/Edu-News" target="_blank">View on GitHub</a>
-        <a href="https://lenn106.github.io/Edu-News" target="_blank">Project Website</a>
-      </div>
-    </div>
-  </div>
-</body>
+  <h1>Welcome to My Website</h1>
+  
+  <!-- Google Sign-In Button -->
+  <div id="google-signin-button"></div>
 
+  <script>
+    // Google Sign-In Configuration
+    function onSuccess(googleUser) {
+      // Retrieve user information
+      var profile = googleUser.getBasicProfile();
+      var userId = profile.getId();
+      var userName = profile.getName();
+      var userEmail = profile.getEmail();
+      
+      // Send user data to the server for association/storage
+      
+      // Redirect or perform additional actions
+    }
+
+    function onFailure(error) {
+      console.log(error);
+    }
+
+    function renderButton() {
+      gapi.signin2.render('google-signin-button', {
+        'scope': 'profile email',
+        'width': 240,
+        'height': 50,
+        'longtitle': true,
+        'theme': 'dark',
+        'onsuccess': onSuccess,
+        'onfailure': onFailure
+      });
+    }
+  </script>
+
+  <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
+</body>
 </html>
