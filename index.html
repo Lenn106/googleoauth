@@ -1,56 +1,180 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8">
-  <title>Google Sign-In Integration</title>
-  <script src="https://accounts.google.com/gsi/client" async defer></script>
+  <title>Byte Bots - Homepage</title>
+  <style>
+    body {
+      background: #f7f7f7;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    .footer {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 60px;
+      background-color: #333;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px;
+      z-index: 999;
+    }
+
+    .homepage-section {
+      background-color: #fff;
+      padding: 20px;
+      margin-top: 80px;
+      text-align: center;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .homepage-section h2 {
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+    }
+
+    .video-container {
+      display: flex;
+      overflow-x: auto;
+      white-space: nowrap;
+      margin-top: 20px;
+    }
+
+    .video-card {
+      width: 200px;
+      height: 140px;
+      background-color: #f7f7f7;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+      display: inline-block;
+      margin-right: 10px;
+      flex: 0 0 auto;
+    }
+
+    .video-card iframe {
+      width: 100%;
+      height: 100%;
+      border-radius: 8px;
+    }
+  </style>
 </head>
 <body>
-  <h1>Welcome to My Website</h1>
-  
-  <!-- Get Client ID Button -->
-  <button onclick="redirectToConsole()">Get Client ID</button>
+  <div class="footer">
+    <!-- Footer content -->
+  </div>
 
-  <!-- Google Sign-In Button -->
-  <div id="google-signin-button"></div>
+  <div id="container-wrapper">
+    <div class="homepage-section draggable" id="recommended" draggable="true">
+      <h2>Recommended</h2>
+      <div class="video-container">
+        <div class="video-card">
+          <iframe width="200" height="140" src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+        <div class="video-card">
+          <iframe width="200" height="140" src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+        <div class="video-card">
+          <iframe width="200" height="140" src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
+
+    <div class="homepage-section draggable" id="latest" draggable="true">
+      <h2>Latest</h2>
+      <div class="video-container">
+        <div class="video-card">
+          <iframe width="200" height="140" src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+        <div class="video-card">
+          <iframe width="200" height="140" src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+        <div class="video-card">
+          <iframe width="200" height="140" src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
+
+    <div class="homepage-section draggable" id="most-liked" draggable="true">
+      <h2>Most Liked</h2>
+      <div class="video-container">
+        <div class="video-card">
+          <iframe width="200" height="140" src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+        <div class="video-card">
+          <iframe width="200" height="140" src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+        <div class="video-card">
+          <iframe width="200" height="140" src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <script>
-    // Function to redirect users to Google Developers Console
-    function redirectToConsole() {
-      window.location.href = "https://console.developers.google.com/";
+    const draggableRows = document.querySelectorAll('.draggable');
+    const container = document.getElementById('container-wrapper');
+
+    function handleDragStart(e) {
+      this.classList.add('dragging');
     }
 
-    // Google Sign-In Configuration
-    function onSuccess(googleUser) {
-      // Retrieve user information
-      var profile = googleUser.getBasicProfile();
-      var userId = profile.getId();
-      var userName = profile.getName();
-      var userEmail = profile.getEmail();
-      
-      // Send user data to the server for association/storage
-      
-      // Redirect or perform additional actions
+    function handleDragOver(e) {
+      e.preventDefault();
     }
 
-    function onFailure(error) {
-      console.log(error);
+    function handleDragEnter(e) {
+      e.preventDefault();
+      this.classList.add('dragover');
     }
 
-    function renderButton() {
-      gapi.signin2.render('google-signin-button', {
-        'scope': 'profile email',
-        'width': 240,
-        'height': 50,
-        'longtitle': true,
-        'theme': 'dark',
-        'onsuccess': onSuccess,
-        'onfailure': onFailure,
-        'client_id': 'YOUR_CLIENT_ID' // Replace with your actual client ID
+    function handleDragLeave() {
+      this.classList.remove('dragover');
+    }
+
+    function handleDrop() {
+      const draggable = document.querySelector('.dragging');
+      container.appendChild(draggable); // Append the dropped section to the container
+      this.classList.remove('dragover');
+      saveVideoPositions();
+    }
+
+    function saveVideoPositions() {
+      const videoPositions = [];
+      draggableRows.forEach((row) => {
+        videoPositions.push(row.id);
       });
+      localStorage.setItem('videoPositions', JSON.stringify(videoPositions));
     }
-  </script>
 
-  <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
+    function loadVideoPositions() {
+      const storedPositions = localStorage.getItem('videoPositions');
+      if (storedPositions) {
+        const videoPositions = JSON.parse(storedPositions);
+        videoPositions.forEach((position) => {
+          const draggable = document.getElementById(position);
+          if (draggable) {
+            container.appendChild(draggable);
+          }
+        });
+      }
+    }
+
+    draggableRows.forEach((row) => {
+      row.addEventListener('dragstart', handleDragStart);
+      row.addEventListener('dragover', handleDragOver);
+      row.addEventListener('dragenter', handleDragEnter);
+      row.addEventListener('dragleave', handleDragLeave);
+      row.addEventListener('drop', handleDrop);
+    });
+
+    // Load the positions on page load
+    loadVideoPositions();
+  </script>
 </body>
 </html>
